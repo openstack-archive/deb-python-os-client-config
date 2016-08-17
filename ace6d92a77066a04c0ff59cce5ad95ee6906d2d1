@@ -1,0 +1,10 @@
+Code-Review+1: Terry Howe <terrylhowe@gmail.com>
+Code-Review+1: greghaynes <greg@greghaynes.net>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sun, 03 May 2015 21:42:41 +0000
+Reviewed-on: https://review.openstack.org/179611
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

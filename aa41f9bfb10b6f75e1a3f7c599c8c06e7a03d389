@@ -1,0 +1,11 @@
+Code-Review+1: David Stanek <dstanek@dstanek.com>
+Code-Review+1: Davanum Srinivas (dims) <davanum@gmail.com>
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 18 Sep 2015 22:57:50 +0000
+Reviewed-on: https://review.openstack.org/225328
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

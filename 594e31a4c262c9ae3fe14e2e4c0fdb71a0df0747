@@ -1,0 +1,9 @@
+Code-Review+2: Doug Hellmann <doug@doughellmann.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sun, 03 Jan 2016 00:54:27 +0000
+Reviewed-on: https://review.openstack.org/262592
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

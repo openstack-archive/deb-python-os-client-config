@@ -1,0 +1,9 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Dean Troyer <dtroyer@gmail.com>
+Workflow+1: Dean Troyer <dtroyer@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 05 Jun 2015 19:23:46 +0000
+Reviewed-on: https://review.openstack.org/188802
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

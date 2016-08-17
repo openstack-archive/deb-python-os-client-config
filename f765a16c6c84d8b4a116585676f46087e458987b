@@ -1,0 +1,8 @@
+Code-Review+2: Morgan Fainberg <morgan.fainberg@gmail.com>
+Workflow+1: Morgan Fainberg <morgan.fainberg@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 24 Dec 2015 01:30:08 +0000
+Reviewed-on: https://review.openstack.org/260817
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

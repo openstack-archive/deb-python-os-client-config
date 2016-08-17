@@ -1,0 +1,9 @@
+Code-Review+1: Loic Dachary <loic@dachary.org>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 09 Nov 2015 14:46:11 +0000
+Reviewed-on: https://review.openstack.org/243122
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Ghe Rivero <ghe.rivero@gmail.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 02 Jun 2016 07:34:32 +0000
+Reviewed-on: https://review.openstack.org/323704
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

@@ -1,0 +1,9 @@
+Code-Review+2: Dean Troyer <dtroyer@gmail.com>
+Code-Review+2: Terry Howe <terrylhowe@gmail.com>
+Workflow+1: Terry Howe <terrylhowe@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 17 Sep 2015 01:58:49 +0000
+Reviewed-on: https://review.openstack.org/224368
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

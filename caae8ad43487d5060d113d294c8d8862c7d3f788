@@ -1,0 +1,9 @@
+Code-Review+2: Ghe Rivero <ghe.rivero@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 07 Jan 2016 17:40:35 +0000
+Reviewed-on: https://review.openstack.org/264635
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

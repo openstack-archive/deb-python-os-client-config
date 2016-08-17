@@ -1,0 +1,9 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Workflow+1: Steve Martinelli <s.martinelli@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 19 Nov 2015 22:59:39 +0000
+Reviewed-on: https://review.openstack.org/244690
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

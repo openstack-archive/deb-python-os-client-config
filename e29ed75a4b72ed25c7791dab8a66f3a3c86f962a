@@ -1,0 +1,9 @@
+Code-Review+2: Ghe Rivero <ghe.rivero@gmail.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 17 Aug 2015 15:37:47 +0000
+Reviewed-on: https://review.openstack.org/212428
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

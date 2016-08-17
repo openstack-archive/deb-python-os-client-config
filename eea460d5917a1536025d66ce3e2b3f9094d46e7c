@@ -1,0 +1,9 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Morgan Fainberg <morgan.fainberg@gmail.com>
+Workflow+1: Morgan Fainberg <morgan.fainberg@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 05 Dec 2015 02:10:14 +0000
+Reviewed-on: https://review.openstack.org/253048
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

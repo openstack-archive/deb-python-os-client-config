@@ -1,0 +1,11 @@
+Code-Review+2: Terry Howe <terrylhowe@gmail.com>
+Code-Review+1: mark mcclain <mark@mcclain.xyz>
+Code-Review+2: Dean Troyer <dtroyer@gmail.com>
+Code-Review+2: Morgan Fainberg <morgan.fainberg@gmail.com>
+Workflow+1: Morgan Fainberg <morgan.fainberg@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 13 Jan 2016 20:21:57 +0000
+Reviewed-on: https://review.openstack.org/267092
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master

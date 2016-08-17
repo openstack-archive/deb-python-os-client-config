@@ -1,0 +1,8 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 03 Nov 2015 00:08:27 +0000
+Reviewed-on: https://review.openstack.org/241031
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master
