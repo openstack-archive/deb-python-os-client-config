@@ -16,6 +16,7 @@
 # under the License.
 
 
+import copy
 import os
 import tempfile
 
@@ -31,6 +32,7 @@ VENDOR_CONF = {
     'public-clouds': {
         '_test_cloud_in_our_cloud': {
             'auth': {
+                'auth_url': 'http://example.com/v2',
                 'username': 'testotheruser',
                 'project_name': 'testproject',
             },
@@ -38,25 +40,119 @@ VENDOR_CONF = {
     }
 }
 USER_CONF = {
+    'cache': {
+        'max_age': '1',
+        'expiration': {
+            'server': 5,
+            'image': '7',
+        },
+    },
+    'client': {
+        'force_ipv4': True,
+    },
     'clouds': {
-        '_test_cloud_': {
-            'cloud': '_test_cloud_in_our_cloud',
+        '_test-cloud_': {
+            'profile': '_test_cloud_in_our_cloud',
             'auth': {
+                'auth_url': 'http://example.com/v2',
                 'username': 'testuser',
                 'password': 'testpass',
             },
             'region_name': 'test-region',
         },
         '_test_cloud_no_vendor': {
-            'cloud': '_test_non_existant_cloud',
+            'profile': '_test_non_existant_cloud',
+            'auth': {
+                'auth_url': 'http://example.com/v2',
+                'username': 'testuser',
+                'project_name': 'testproject',
+            },
+            'region-name': 'test-region',
+        },
+        '_test-cloud-int-project_': {
             'auth': {
                 'username': 'testuser',
                 'password': 'testpass',
-                'project_name': 'testproject',
+                'domain_id': 'awesome-domain',
+                'project_id': 12345,
+                'auth_url': 'http://example.com/v2',
             },
             'region_name': 'test-region',
         },
+        '_test-cloud-domain-id_': {
+            'auth': {
+                'username': 'testuser',
+                'password': 'testpass',
+                'project_id': 12345,
+                'auth_url': 'http://example.com/v2',
+                'domain_id': '6789',
+                'project_domain_id': '123456789',
+            },
+            'region_name': 'test-region',
+        },
+        '_test_cloud_regions': {
+            'auth': {
+                'username': 'testuser',
+                'password': 'testpass',
+                'project-id': 'testproject',
+                'auth_url': 'http://example.com/v2',
+            },
+            'regions': [
+                {
+                    'name': 'region1',
+                    'values': {
+                        'external_network': 'region1-network',
+                    }
+                },
+                {
+                    'name': 'region2',
+                    'values': {
+                        'external_network': 'my-network',
+                    }
+                }
+            ],
+        },
+        '_test_cloud_hyphenated': {
+            'auth': {
+                'username': 'testuser',
+                'password': 'testpass',
+                'project-id': '12345',
+                'auth_url': 'http://example.com/v2',
+            },
+            'region_name': 'test-region',
+        },
+        '_test-cloud_no_region': {
+            'profile': '_test_cloud_in_our_cloud',
+            'auth': {
+                'auth_url': 'http://example.com/v2',
+                'username': 'testuser',
+                'password': 'testpass',
+            },
+        },
+        '_test-cloud-domain-scoped_': {
+            'auth': {
+                'auth_url': 'http://example.com/v2',
+                'username': 'testuser',
+                'password': 'testpass',
+                'domain-id': '12345',
+            },
+        },
     },
+    'ansible': {
+        'expand-hostvars': False,
+        'use_hostnames': True,
+    },
+}
+SECURE_CONF = {
+    'clouds': {
+        '_test_cloud_no_vendor': {
+            'auth': {
+                'password': 'testpass',
+            },
+        }
+    }
+}
+NO_CONF = {
     'cache': {'max_age': 1},
 }
 
@@ -75,11 +171,13 @@ class TestCase(base.BaseTestCase):
         super(TestCase, self).setUp()
 
         self.useFixture(fixtures.NestedTempfile())
-        conf = dict(USER_CONF)
+        conf = copy.deepcopy(USER_CONF)
         tdir = self.useFixture(fixtures.TempDir())
         conf['cache']['path'] = tdir.path
         self.cloud_yaml = _write_yaml(conf)
+        self.secure_yaml = _write_yaml(SECURE_CONF)
         self.vendor_yaml = _write_yaml(VENDOR_CONF)
+        self.no_yaml = _write_yaml(NO_CONF)
 
         # Isolate the test runs from the environment
         # Do this as two loops because you can't modify the dict in a loop
@@ -98,4 +196,13 @@ class TestCase(base.BaseTestCase):
         self.assertIsNone(cc.cloud)
         self.assertIn('username', cc.auth)
         self.assertEqual('testuser', cc.auth['username'])
-        self.assertEqual('testproject', cc.auth['project_name'])
+        self.assertEqual('testpass', cc.auth['password'])
+        self.assertFalse(cc.config['image_api_use_tasks'])
+        self.assertTrue('project_name' in cc.auth or 'project_id' in cc.auth)
+        if 'project_name' in cc.auth:
+            self.assertEqual('testproject', cc.auth['project_name'])
+        elif 'project_id' in cc.auth:
+            self.assertEqual('testproject', cc.auth['project_id'])
+        self.assertEqual(cc.get_cache_expiration_time(), 1)
+        self.assertEqual(cc.get_cache_resource_expiration('server'), 5.0)
+        self.assertEqual(cc.get_cache_resource_expiration('image'), 7.0)

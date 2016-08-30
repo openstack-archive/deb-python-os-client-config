@@ -1,0 +1,17 @@
+Description: Do not use reno
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2016-01-17
+
+--- python-os-client-config-1.14.0.orig/doc/source/conf.py
++++ python-os-client-config-1.14.0/doc/source/conf.py
+@@ -23,8 +23,7 @@ sys.path.insert(0, os.path.abspath('../.
+ extensions = [
+     'sphinx.ext.autodoc',
+     #'sphinx.ext.intersphinx',
+-    'oslosphinx',
+-    'reno.sphinxext'
++    'oslosphinx'
+ ]
+ 
+ # autodoc generation is a bit aggressive and a nuisance when doing heavy
