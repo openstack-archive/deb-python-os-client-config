@@ -12,12 +12,30 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-_defaults = dict(
-    auth_type='password',
-    compute_api_version='2',
-    identity_api_version='2',
-    image_api_version='1',
-    network_api_version='2',
-    object_api_version='1',
-    volume_api_version='1',
-)
+import json
+import os
+
+_json_path = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), 'defaults.json')
+_defaults = None
+
+
+def get_defaults():
+    global _defaults
+    if not _defaults:
+        # Python language specific defaults
+        # These are defaults related to use of python libraries, they are
+        # not qualities of a cloud.
+        _defaults = dict(
+            api_timeout=None,
+            verify=True,
+            cacert=None,
+            cert=None,
+            key=None,
+        )
+        with open(_json_path, 'r') as json_file:
+            updates = json.load(json_file)
+            if updates is not None:
+                _defaults.update(updates)
+
+    return _defaults.copy()
