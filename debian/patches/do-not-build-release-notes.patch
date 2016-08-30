@@ -1,0 +1,14 @@
+Description: Don't build releasenotes in normal docs build
+Author: Monty Taylor <mordred@inaugust.com>
+Origin: upstream, https://review.openstack.org/365053
+Last-Update: 2016-09-02
+
+--- python-os-client-config-1.16.0.orig/doc/source/releasenotes.rst
++++ python-os-client-config-1.16.0/doc/source/releasenotes.rst
+@@ -2,4 +2,5 @@
+ Release Notes
+ =============
+ 
+-.. release-notes::
++Release notes for `os-client-config` can be found at
++http://docs.openstack.org/releasenotes/os-client-config/
