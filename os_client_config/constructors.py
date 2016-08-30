@@ -16,26 +16,13 @@ import json
 import os
 
 _json_path = os.path.join(
-    os.path.dirname(os.path.realpath(__file__)), 'defaults.json')
-_defaults = None
+    os.path.dirname(os.path.realpath(__file__)), 'constructors.json')
+_class_mapping = None
 
 
-def get_defaults():
-    global _defaults
-    if not _defaults:
-        # Python language specific defaults
-        # These are defaults related to use of python libraries, they are
-        # not qualities of a cloud.
-        _defaults = dict(
-            api_timeout=None,
-            verify=True,
-            cacert=None,
-            cert=None,
-            key=None,
-        )
+def get_constructor_mapping():
+    global _class_mapping
+    if not _class_mapping:
         with open(_json_path, 'r') as json_file:
-            updates = json.load(json_file)
-            if updates is not None:
-                _defaults.update(updates)
-
-    return _defaults.copy()
+            _class_mapping = json.load(json_file)
+    return _class_mapping

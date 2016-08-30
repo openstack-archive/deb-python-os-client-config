@@ -1,14 +1,15 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: os-client-config
-Source: https://github.com/openstack/os-client-config.git
-
-Files: debian/*
-Copyright: (c) 2014, Thomas Goirand <zigo@debian.org>
-License: Apache-2
+Source: git://github.com/stackforge/os-client-config.git
 
 Files: *
-Copyright: (c) 2014, OpenStack Foundation
+Copyright: (c) 2014-2016, OpenStack Foundation <openstack-dev@lists.openstack.org>
            (c) 2014 Hewlett-Packard Development Company, L.P.
+License: Apache-2
+
+Files: debian/*
+Copyright: (c) 2014-2016, Thomas Goirand <zigo@debian.org>
+           (c) 2015, gustavo panizzo <gfa@zumbi.com.ar>
 License: Apache-2
 
 License: Apache-2
