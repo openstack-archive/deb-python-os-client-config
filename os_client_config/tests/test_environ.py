@@ -15,6 +15,7 @@
 
 from os_client_config import cloud_config
 from os_client_config import config
+from os_client_config import exceptions
 from os_client_config.tests import base
 
 import fixtures
@@ -29,43 +30,130 @@ class TestEnviron(base.TestCase):
         self.useFixture(
             fixtures.EnvironmentVariable('OS_USERNAME', 'testuser'))
         self.useFixture(
+            fixtures.EnvironmentVariable('OS_PASSWORD', 'testpass'))
+        self.useFixture(
             fixtures.EnvironmentVariable('OS_PROJECT_NAME', 'testproject'))
+        self.useFixture(
+            fixtures.EnvironmentVariable('NOVA_PROJECT_ID', 'testnova'))
 
     def test_get_one_cloud(self):
         c = config.OpenStackConfig(config_files=[self.cloud_yaml],
                                    vendor_files=[self.vendor_yaml])
         self.assertIsInstance(c.get_one_cloud(), cloud_config.CloudConfig)
 
-    def test_envvar_name_override(self):
-        self.useFixture(
-            fixtures.EnvironmentVariable('OS_CLOUD_NAME', 'openstack'))
+    def test_no_fallthrough(self):
         c = config.OpenStackConfig(config_files=[self.cloud_yaml],
                                    vendor_files=[self.vendor_yaml])
-        cc = c.get_one_cloud('openstack')
+        self.assertRaises(
+            exceptions.OpenStackConfigException, c.get_one_cloud, 'openstack')
+
+    def test_envvar_name_override(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('OS_CLOUD_NAME', 'override'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml])
+        cc = c.get_one_cloud('override')
         self._assert_cloud_details(cc)
+
+    def test_envvar_prefer_ipv6_override(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('OS_PREFER_IPV6', 'false'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml],
+                                   secure_files=[self.secure_yaml])
+        cc = c.get_one_cloud('_test-cloud_')
+        self.assertFalse(cc.prefer_ipv6)
 
     def test_environ_exists(self):
         c = config.OpenStackConfig(config_files=[self.cloud_yaml],
-                                   vendor_files=[self.vendor_yaml])
+                                   vendor_files=[self.vendor_yaml],
+                                   secure_files=[self.secure_yaml])
         cc = c.get_one_cloud('envvars')
         self._assert_cloud_details(cc)
         self.assertNotIn('auth_url', cc.config)
         self.assertIn('auth_url', cc.config['auth'])
+        self.assertNotIn('project_id', cc.config['auth'])
         self.assertNotIn('auth_url', cc.config)
-        cc = c.get_one_cloud('_test_cloud_')
+        cc = c.get_one_cloud('_test-cloud_')
+        self._assert_cloud_details(cc)
+        cc = c.get_one_cloud('_test_cloud_no_vendor')
+        self._assert_cloud_details(cc)
+
+    def test_environ_prefix(self):
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml],
+                                   envvar_prefix='NOVA_',
+                                   secure_files=[self.secure_yaml])
+        cc = c.get_one_cloud('envvars')
+        self._assert_cloud_details(cc)
+        self.assertNotIn('auth_url', cc.config)
+        self.assertIn('auth_url', cc.config['auth'])
+        self.assertIn('project_id', cc.config['auth'])
+        self.assertNotIn('auth_url', cc.config)
+        cc = c.get_one_cloud('_test-cloud_')
         self._assert_cloud_details(cc)
         cc = c.get_one_cloud('_test_cloud_no_vendor')
         self._assert_cloud_details(cc)
 
     def test_get_one_cloud_with_config_files(self):
         c = config.OpenStackConfig(config_files=[self.cloud_yaml],
-                                   vendor_files=[self.vendor_yaml])
+                                   vendor_files=[self.vendor_yaml],
+                                   secure_files=[self.secure_yaml])
         self.assertIsInstance(c.cloud_config, dict)
         self.assertIn('cache', c.cloud_config)
         self.assertIsInstance(c.cloud_config['cache'], dict)
         self.assertIn('max_age', c.cloud_config['cache'])
         self.assertIn('path', c.cloud_config['cache'])
-        cc = c.get_one_cloud('_test_cloud_')
+        cc = c.get_one_cloud('_test-cloud_')
         self._assert_cloud_details(cc)
         cc = c.get_one_cloud('_test_cloud_no_vendor')
         self._assert_cloud_details(cc)
+
+    def test_config_file_override(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable(
+                'OS_CLIENT_CONFIG_FILE', self.cloud_yaml))
+        c = config.OpenStackConfig(config_files=[],
+                                   vendor_files=[self.vendor_yaml])
+        cc = c.get_one_cloud('_test-cloud_')
+        self._assert_cloud_details(cc)
+
+
+class TestEnvvars(base.TestCase):
+
+    def test_no_envvars(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('NOVA_USERNAME', 'nova'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml])
+        self.assertRaises(
+            exceptions.OpenStackConfigException, c.get_one_cloud, 'envvars')
+
+    def test_test_envvars(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('NOVA_USERNAME', 'nova'))
+        self.useFixture(
+            fixtures.EnvironmentVariable('OS_STDERR_CAPTURE', 'True'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml])
+        self.assertRaises(
+            exceptions.OpenStackConfigException, c.get_one_cloud, 'envvars')
+
+    def test_have_envvars(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('NOVA_USERNAME', 'nova'))
+        self.useFixture(
+            fixtures.EnvironmentVariable('OS_USERNAME', 'user'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml])
+        cc = c.get_one_cloud('envvars')
+        self.assertEqual(cc.config['auth']['username'], 'user')
+
+    def test_old_envvars(self):
+        self.useFixture(
+            fixtures.EnvironmentVariable('NOVA_USERNAME', 'nova'))
+        c = config.OpenStackConfig(config_files=[self.cloud_yaml],
+                                   vendor_files=[self.vendor_yaml],
+                                   envvar_prefix='NOVA_')
+        cc = c.get_one_cloud('envvars')
+        self.assertEqual(cc.config['auth']['username'], 'nova')
