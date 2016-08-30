@@ -1,0 +1,15 @@
+Description: Also package .json files
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2015-12-08
+
+--- python-os-client-config-1.12.0.orig/MANIFEST.in
++++ python-os-client-config-1.12.0/MANIFEST.in
+@@ -3,4 +3,5 @@ include ChangeLog
+ exclude .gitignore
+ exclude .gitreview
+ 
+-global-exclude *.pyc
+\ No newline at end of file
++global-exclude *.pyc
++recursive-include os_client_config *.json
