@@ -1,0 +1,11 @@
+Code-Review+2: Terry Howe <terrylhowe@gmail.com>
+Code-Review+1: venkatamahesh <Venkata.Kotha@infinite.com>
+Code-Review+1: Julia Kreger <juliaashleykreger@gmail.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 22 Sep 2015 19:37:27 +0000
+Reviewed-on: https://review.openstack.org/226406
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/stable/liberty
