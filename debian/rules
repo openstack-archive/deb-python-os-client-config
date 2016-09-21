@@ -24,19 +24,18 @@ override_dh_install:
 
 override_dh_auto_test:
 ifeq (,$(findstring nocheck, $(DEB_BUILD_OPTIONS)))
-	echo "Disabled tests until build-depends are available"
-#	echo "===> Running tests"
-#	set -e && for i in $(PYTHONS) $(PYTHON3S) ; do \
-#		PYMAJOR=`echo $$i | cut -d'.' -f1` ; \
-#		echo "===> Testing with python$$i (python$$PYMAJOR)" ; \
-#		rm -rf .testrepository ; \
-#		testr-python$$PYMAJOR init ; \
-#		TEMP_REZ=`mktemp -t` && \
-#		PYTHONPATH=$(CURDIR) PYTHON=python$$i testr-python$$PYMAJOR run --subunit 'os_client_config\.tests\.(?!(.*OptsTestCase.test_entry_point.*|.*test_environ.TestEnviron.test_environ_exists.*|.*test_environ.TestEnviron.test_envvar_name_override.*|.*test_config.TestConfig.test_get_all_clouds.*|.*TestBackwardsCompatibility\.test_set_no_default.*))' | tee $$TEMP_REZ | subunit2pyunit ; \
-#		cat $$TEMP_REZ | subunit-filter -s --no-passthrough | subunit-stats ; \
-#		rm -f $$TEMP_REZ ; \
-#		testr-python$$PYMAJOR slowest ; \
-#	done
+	echo "===> Running tests"
+	set -e && for i in $(PYTHONS) $(PYTHON3S) ; do \
+		PYMAJOR=`echo $$i | cut -d'.' -f1` ; \
+		echo "===> Testing with python$$i (python$$PYMAJOR)" ; \
+		rm -rf .testrepository ; \
+		testr-python$$PYMAJOR init ; \
+		TEMP_REZ=`mktemp -t` && \
+		PYTHONPATH=$(CURDIR) PYTHON=python$$i testr-python$$PYMAJOR run --subunit 'os_client_config\.tests\.(?!(.*OptsTestCase.test_entry_point.*|.*test_environ.TestEnviron.test_environ_exists.*|.*test_environ.TestEnviron.test_envvar_name_override.*|.*test_config.TestConfig.test_get_all_clouds.*|.*TestBackwardsCompatibility\.test_set_no_default.*))' | tee $$TEMP_REZ | subunit2pyunit ; \
+		cat $$TEMP_REZ | subunit-filter -s --no-passthrough | subunit-stats ; \
+		rm -f $$TEMP_REZ ; \
+		testr-python$$PYMAJOR slowest ; \
+	done
 endif
 
 override_dh_clean:
