@@ -1,0 +1,10 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Code-Review+2: Dean Troyer <dtroyer@gmail.com>
+Workflow+1: Dean Troyer <dtroyer@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 11 Nov 2016 18:00:22 +0000
+Reviewed-on: https://review.openstack.org/389636
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master
