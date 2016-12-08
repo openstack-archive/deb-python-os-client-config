@@ -1,0 +1,10 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+1: Jamie Lennox <jamielennox@gmail.com>
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Workflow+1: Steve Martinelli <s.martinelli@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 08 Dec 2016 05:29:00 +0000
+Reviewed-on: https://review.openstack.org/408282
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master
