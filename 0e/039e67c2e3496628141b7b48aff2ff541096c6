@@ -1,0 +1,10 @@
+Code-Review+1: Renat Akhmerov <renat.akhmerov@gmail.com>
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Code-Review+1: Mike Perez <thingee@gmail.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 04 Mar 2017 17:10:50 +0000
+Reviewed-on: https://review.openstack.org/434344
+Project: openstack/deb-python-os-client-config
+Branch: refs/heads/master
