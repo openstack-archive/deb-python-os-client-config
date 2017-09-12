@@ -1,4 +1,0 @@
----
-features:
-  - Add support for passing Ironic microversion to the ironicclient
-    constructor in get_legacy_client.
